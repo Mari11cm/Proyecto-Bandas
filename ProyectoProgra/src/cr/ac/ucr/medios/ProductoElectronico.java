@@ -10,6 +10,7 @@ package cr.ac.ucr.medios;
  * @author Mariela
  */
 public abstract class ProductoElectronico {
+    private String tipo;
     private String color; 
     private String marca;
     private String modelo;
@@ -55,6 +56,14 @@ public abstract class ProductoElectronico {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getMesesDEGrarantia() {
