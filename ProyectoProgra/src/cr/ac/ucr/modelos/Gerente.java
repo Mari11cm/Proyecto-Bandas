@@ -16,12 +16,12 @@ public class Gerente {
     private String correo;
     private String contrasenia;
 
-    public Gerente(String nombre, String apellidos, String telefono, String correo) {
+    public Gerente(String nombre, String apellidos, String telefono, String correo, String contrasenia) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.correo = correo;
-        contrasenia="";
+        this.contrasenia= contrasenia;
     }
     
     public void crearContrasenia(){

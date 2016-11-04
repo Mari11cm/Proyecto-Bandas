@@ -5,6 +5,7 @@
  */
 package cr.ac.ucr.gui;
 
+import cr.ac.ucr.archivos.ArchivoGerente;
 import javax.swing.JOptionPane;
 
 
@@ -15,11 +16,12 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     Menu menu;
-
+    ArchivoGerente archivoGerente;
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        archivoGerente= new ArchivoGerente();
     }
 
     /**
@@ -32,7 +34,7 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtfCorreo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
@@ -48,7 +50,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(204, 102, 0));
         jLabel2.setText("Correo electónico");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 108, 232, -1));
+        getContentPane().add(jtfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 108, 232, -1));
 
         jLabel3.setFont(new java.awt.Font("Malgun Gothic", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 102, 0));
@@ -94,12 +96,15 @@ public class Login extends javax.swing.JFrame {
             pass += passChar[i];
         }
 
-        if (jTextField1.getText().equals("") || pass.equals("")) {
+        if (jtfCorreo.getText().equals("") || pass.equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene los espacios");
-        } else {
-            menu = new Menu();
+        }else if(archivoGerente.gerenteLogin(jtfCorreo.getText(), pass)){
+            JOptionPane.showMessageDialog(null, "Gerente encontrado, Bienvenido!!!");
+                 menu = new Menu();
             menu.setVisible(true);
             this.setVisible(false);
+        }else {
+           JOptionPane.showMessageDialog(null, "No está registrado");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -112,6 +117,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtfCorreo;
     // End of variables declaration//GEN-END:variables
 }
