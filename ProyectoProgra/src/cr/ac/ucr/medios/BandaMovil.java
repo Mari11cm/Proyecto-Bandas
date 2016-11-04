@@ -11,18 +11,24 @@ package cr.ac.ucr.medios;
  */
 public class BandaMovil extends Banda implements Runnable{
     private Thread hiloMovil;
-
+    
+    public BandaMovil(Thread hiloMovil, String marca, int anioFabricacion, 
+            String nombreProductoAFabricar, String tipoProductoAFabricar,long velocidad) {
+        super(marca, anioFabricacion, nombreProductoAFabricar, 
+                tipoProductoAFabricar, velocidad);
+        this.hiloMovil = hiloMovil;
+    }
     @Override
     public void run() {
+        while(true){
+            if(getEstado().equals("Produciendo")){
+                
+            }
+        }
         
     }
 
-    public BandaMovil(Thread hiloMovil, String marca, int anioFabricacion, 
-            String nombreProductoAFabricar, String tipoProductoAFabricar) {
-        super(marca, anioFabricacion, nombreProductoAFabricar, 
-                tipoProductoAFabricar);
-        this.hiloMovil = hiloMovil;
-    }
+    
 
     
     

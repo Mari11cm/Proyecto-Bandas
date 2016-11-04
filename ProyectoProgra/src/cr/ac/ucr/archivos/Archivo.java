@@ -5,6 +5,8 @@
  */
 package cr.ac.ucr.archivos;
 
+import cr.ac.ucr.medios.ProductoElectronico;
+
 /**
  *
  * @author Mariela
@@ -19,7 +21,8 @@ public class Archivo {
     }
     /* -----------METODOS PRINCIPALES DE LAS BANDAS----------------*/
    
-    public void registrarProducto(){
+    public static void registrarProducto(ProductoElectronico producto){
+        System.out.println("Registró correctamente");
         
     }
     public void registrarConflictos(){

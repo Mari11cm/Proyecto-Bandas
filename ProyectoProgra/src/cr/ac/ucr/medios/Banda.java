@@ -5,58 +5,110 @@
  */
 package cr.ac.ucr.medios;
 
+import static cr.ac.ucr.mainclases.ClasePrincipal.*;
+import static cr.ac.ucr.medios.Despacho.agregarADespacho;
+import static java.lang.Thread.sleep;
+
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Mariela
  */
-public abstract class Banda  {
+public abstract class Banda extends Thread {
+
     private String marca;
     private int anioFabricacion;
     private String nombreProductoAFabricar;
     private String tipoProductoAFabricar;
     private String estado;
     private int cantidadProductosElaborados;
-    private long velocidad;
+    long velocidad;
     private int tiempoActual;
     private int tiempoRestante;
-    private  Date horaYFechaActual;
+    private Date horaYFechaActual;
+    private boolean pausa;
+
+
     /*OPCIONAL
     private Date horaActual;
     private Date fechaActual;*/
-
-    public Banda(String marca, int anioFabricacion, String nombreProductoAFabricar, 
-            String tipoProductoAFabricar) {
+    public Banda(String marca, int anioFabricacion, String nombreProductoAFabricar,
+            String tipoProductoAFabricar, long velocidad) {
         this.marca = marca;
         this.anioFabricacion = anioFabricacion;
         this.nombreProductoAFabricar = nombreProductoAFabricar;
         this.tipoProductoAFabricar = tipoProductoAFabricar;
-        estado="Dañada";
-        cantidadProductosElaborados=0;
-        velocidad=1000;
-        tiempoActual=0;
-        tiempoRestante=0;
-        horaYFechaActual=new Date();
+        this.velocidad = velocidad;
+        estado = "Dañada";
+        //cantidadProductosElaborados=0;
+        tiempoActual = 0;
+        tiempoRestante = 0;
+        horaYFechaActual = new Date();
+        pausa = true;
     }
+
     /* -----------METODOS PRINCIPALES DE LAS BANDAS----------------*/
-  
-    public void producirItem(String tipoProducto, long velocidad){
-        cantidadProductosElaborados++;
+    public void producirItem(long velocidad) {
+        if(tipoProductoAFabricar.equals("A")){
+            Computador com1 = new Computador("verde", "HP", "E200", 32000, 24, "CORE I3", 4, false);
+            agregarADespacho(com1);
+            tipoAEnProduccion++;
+        }
+        else{
+            Movil mov1 = new Movil("negro", "Samsung", "E200", 32000, 12, 32.9,12.3);
+            agregarADespacho(mov1);
+            tipoBEnProduccion++;
+        }
+        try {
+            sleep(velocidad);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Banda.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    public void pausarBanda(){
-        
+
+    public synchronized void pausarBanda() {
+        if (pausa) {
+            try {
+                sleep(3000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BandaComputador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    public void reanudarBanda(long velocidad){
-        this.velocidad=velocidad;
-                
+    public synchronized void reanudarBanda(long velocidad) {
+        setEstado("Produciendo");
+        pausa = false;
+        setVelocidad(velocidad);
+        System.out.println("Banda Reanudada");
     }
-    public void mantenimientoDeBanda(int tiempoRestante){
-        
+
+    public synchronized void mantenimientoDeBanda(int tiempoRestante) {
+        try {
+            pausa=false;
+            System.out.println("\nBANDA EN MANTENIMIENTO" + getId());
+            sleep(30000);
+            System.out.println("\nYA DORMI VUELVO A PRODUCIR" + getId());
+            setEstado("Produciendo");
+            setVelocidad(restantes);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Banda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    public void bandaDañada(){
-        
+
+    public void bandaDañada() {
+         if (pausa) {
+            try {
+                sleep(4000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BandaComputador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
+
     /* -----------FIN METODOS PRINCIPALES DE LAS BANDAS----------------*/
     public String getMarca() {
         return marca;
@@ -98,14 +150,6 @@ public abstract class Banda  {
         this.estado = estado;
     }
 
-    public int getCantidadProductosElaborados() {
-        return cantidadProductosElaborados;
-    }
-
-    public void setCantidadProductosElaborados(int cantidadProductosElaborados) {
-        this.cantidadProductosElaborados = cantidadProductosElaborados;
-    }
-
     public long getVelocidad() {
         return velocidad;
     }
@@ -140,11 +184,10 @@ public abstract class Banda  {
 
     @Override
     public String toString() {
-        return "Banda\n"+"Marca: " + marca + "Año Fabricacion: " 
-                +anioFabricacion+"Nombre del Producto a Fabricar: "
-                + nombreProductoAFabricar + "Tipo de Producto a Fabricar: " 
+        return "Banda\n" + "Marca: " + marca + "Año Fabricacion: "
+                + anioFabricacion + "Nombre del Producto a Fabricar: "
+                + nombreProductoAFabricar + "Tipo de Producto a Fabricar: "
                 + tipoProductoAFabricar;
     }
-   
-            
+
 }

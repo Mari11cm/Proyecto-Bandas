@@ -22,7 +22,7 @@ public class Computador extends ProductoElectronico{
         this.cantidadMemoriaRam=cantidadMemoriaRAM;
         this.pantallaTactil=pantallaTactil;
     }
-    
+   
     public String getTipoProcesador() {
         return tipoProcesador;
     }

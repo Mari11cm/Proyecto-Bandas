@@ -5,14 +5,24 @@
  */
 package cr.ac.ucr.medios;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import static cr.ac.ucr.archivos.Archivo.registrarProducto;
+import static cr.ac.ucr.mainclases.ClasePrincipal.*;
+import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Mariela
  */
 public class Despacho {
-    private Queue colaDespacho;
+    /*private Queue colaDespacho;
     private static final int CAPACIDAD_DESPACHO=50;
     private int tipoAEnDespacho;
     private int tipoBEnDespacho;
@@ -21,17 +31,44 @@ public class Despacho {
     private int tipoAEnProduccion;
     private int tipoBEnProduccion;
     private int totalDeProducion;
-    private int restantes;
+    private int restantes;*/
     private long tiempoDeDespacho;
     
     public Despacho() {
+      tiempoDeDespacho=0;
     }
-    /* -----------METODOS PRINCIPALES DE DESPACHO----------------*/
-    public void agregarADespacho(ProductoElectronico producto){
-        System.out.println(producto.toString());
-    }
-    public void despacharProductos(long tiempoDeDespacho){
+    /* -----------METODOS PRINCIPALES DEew  DESPACHO----------------*/
+    public static void agregarADespacho(ProductoElectronico producto){
+        try {
+            //se puede implementar aqui 
+            semaforoBanda1.acquire();
+            mutex.acquire();
+            colaDespacho.add(producto);
+            cantidadProductosElaborados++;
+            semaforoBanda1.release();
+            mutex.release();
+            //o solo se deja este metodo aqui
+            if(producto.getTipo().equals("A")){
+               tipoAEnDespacho++;
+            }
+            else{
+                tipoBEnDespacho++;
+            }
+            registrarProducto(producto);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Despacho.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+    }
+    public static void despacharProductos(long tiempoDeDespacho){
+        for (int i = 0; i < (colaDespacho.size()/2); i++) {
+           colaDespacho.poll();
+        }
+        try {
+            sleep(tiempoDeDespacho);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Despacho.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }  
     /* -----------FIN METODOS PRINCIPALES DE DESPACHO----------------*/
 
@@ -39,7 +76,7 @@ public class Despacho {
         return colaDespacho;
     }
 
-    public void setColaDespacho(Queue colaDespacho) {
+    /*public void setColaDespacho(Queue colaDespacho) {
         this.colaDespacho = colaDespacho;
     }
 
@@ -105,7 +142,7 @@ public class Despacho {
 
     public void setRestantes(int restantes) {
         this.restantes = restantes;
-    }
+    }*/
 
     public long getTiempoDeDespacho() {
         return tiempoDeDespacho;
