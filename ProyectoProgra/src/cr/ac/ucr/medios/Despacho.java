@@ -34,6 +34,7 @@ public class Despacho {
     private int restantes;*/
     private long tiempoDeDespacho;
     
+    
     public Despacho() {
       tiempoDeDespacho=0;
     }
@@ -54,7 +55,7 @@ public class Despacho {
             else{
                 tipoBEnDespacho++;
             }
-            registrarProducto(producto);
+            
         } catch (InterruptedException ex) {
             Logger.getLogger(Despacho.class.getName()).log(Level.SEVERE, null, ex);
         }

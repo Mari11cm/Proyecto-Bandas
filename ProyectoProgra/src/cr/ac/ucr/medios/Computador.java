@@ -16,8 +16,8 @@ public class Computador extends ProductoElectronico{
 
     public Computador(String color, String marca, String modelo, double precio,
             int mesesDEGrarantia, String tipoProcesador, int cantidadMemoriaRAM, 
-            boolean pantallaTactil) {
-        super(color, marca, modelo, precio, mesesDEGrarantia);
+            boolean pantallaTactil, String tipo) {
+        super(color, marca, modelo, precio, mesesDEGrarantia, tipo);
         this.tipoProcesador=tipoProcesador;
         this.cantidadMemoriaRam=cantidadMemoriaRAM;
         this.pantallaTactil=pantallaTactil;

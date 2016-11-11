@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cr.ac.ucr.medios;
 
 import static cr.ac.ucr.mainclases.ClasePrincipal.*;
@@ -53,12 +49,12 @@ public abstract class Banda extends Thread {
     /* -----------METODOS PRINCIPALES DE LAS BANDAS----------------*/
     public void producirItem(long velocidad) {
         if(tipoProductoAFabricar.equals("A")){
-            Computador com1 = new Computador("verde", "HP", "E200", 32000, 24, "CORE I3", 4, false);
+            Computador com1 = new Computador("verde", "HP", "E200", 32000, 24, "CORE I3", 4, false, "A");
             agregarADespacho(com1);
             tipoAEnProduccion++;
         }
         else{
-            Movil mov1 = new Movil("negro", "Samsung", "E200", 32000, 12, 32.9,12.3);
+            Movil mov1 = new Movil("negro", "Samsung", "E200", 32000, 12, 32.9,12.3,"B");
             agregarADespacho(mov1);
             tipoBEnProduccion++;
         }

@@ -15,8 +15,8 @@ public class Movil extends ProductoElectronico {
     private double densidadPixeles;
 
     public Movil(String color, String marca, String modelo, double precio,
-            int mesesDEGrarantia, double tamanioPantalla, double densidadPixeles) {
-        super(color, marca, modelo, precio, mesesDEGrarantia);
+            int mesesDEGrarantia, double tamanioPantalla, double densidadPixeles, String tipo) {
+        super(color, marca, modelo, precio, mesesDEGrarantia,tipo);
         this.tamanioPantalla = tamanioPantalla;
         this.densidadPixeles = densidadPixeles;
     }

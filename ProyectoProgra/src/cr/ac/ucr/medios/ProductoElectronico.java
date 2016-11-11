@@ -18,13 +18,13 @@ public abstract class ProductoElectronico {
     private String tipo;
 
     public ProductoElectronico(String color, String marca, String modelo, double 
-            precio, int mesesDEGrarantia) {
+            precio, int mesesDEGrarantia, String tipo) {
         this.color = color;
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
         this.mesesDEGrarantia = mesesDEGrarantia;
-        tipo="";
+        this.tipo=tipo;
     }
 
     public String getTipo() {

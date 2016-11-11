@@ -36,7 +36,7 @@ public class ArchivoGerente {
         
    
         try {
-            File listaGerentes= new File("Gerentes");
+            File listaGerentes= new File("Gerentes.txt");
             FileOutputStream fos = new FileOutputStream(listaGerentes,true);
             PrintStream ps= new PrintStream(fos);
             
@@ -59,7 +59,7 @@ public class ArchivoGerente {
 
     BufferedReader entradaArchivo=null;
 
-    File listaGerente= new File("Gerentes");
+    File listaGerente= new File("Gerentes.txt");
         try {
             FileInputStream fis = new FileInputStream(listaGerente);
             InputStreamReader isr=new InputStreamReader(fis);
