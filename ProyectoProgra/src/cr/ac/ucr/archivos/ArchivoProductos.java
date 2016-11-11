@@ -25,7 +25,7 @@ public class ArchivoProductos {
     public ArchivoProductos() {
     }
     
-    public void registrarProductos(ProductoElectronico producto, int segundosBanda){
+    public static void registrarProductos(ProductoElectronico producto, int segundosBanda){
         
         try {
             File listaProductos= new File("Producción.txt");

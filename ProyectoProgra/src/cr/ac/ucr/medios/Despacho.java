@@ -5,6 +5,7 @@
  */
 package cr.ac.ucr.medios;
 
+import static cr.ac.ucr.archivos.ArchivoProductos.registrarProductos;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,6 +49,7 @@ public class Despacho {
             cantidadProductosElaborados++;
             semaforoBanda1.release();
             mutex.release();
+           registrarProductos(producto,3);
             //o solo se deja este metodo aqui
             if(producto.getTipo().equals("A")){
                tipoAEnDespacho++;
