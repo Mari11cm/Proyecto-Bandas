@@ -140,7 +140,7 @@ public class Registrar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Rellene los espacios");
         } else if(!(pass.equals(pass2))){
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
-        } else if(!archivo.buscaGerentes(jtfCorreo.getText())) {
+        } else if(!archivo.buscaGerentes(jtfCorreo.getText(), pass2)) {
             //se pone el metodo que guarda en el archivo
             Gerente gerenteNuevo= new Gerente(jtfNombre.getText(), jtfApellidos.getText(),  jtfTelefono.getText(), jtfCorreo.getText(),jtfContrasena.getText());
             archivo.registrarNuevoGerente(gerenteNuevo);

@@ -7,6 +7,7 @@ package cr.ac.ucr.mainclases;
 
 
 import cr.ac.ucr.archivos.ArchivoConflictos;
+import cr.ac.ucr.archivos.ArchivoGerente;
 import cr.ac.ucr.archivos.ArchivoProductos;
 import cr.ac.ucr.medios.Computador;
 import cr.ac.ucr.medios.Despacho;
@@ -54,7 +55,13 @@ public class ProyectoProgra {
         
         archivo.guardarConflictos(men);
         
+        ArchivoProductos ar= new ArchivoProductos();
+        ProductoElectronico producto4= new Movil("Blanco", "Huawei", "T550",2440000,12,22.2,123.44,"B");
+        ar.registrarProductos(producto4, 0);
         
+        ArchivoGerente a= new ArchivoGerente();
+        Gerente gerente1=new Gerente("Juan", "Solano","2348","jpsb22@hotmail.com","juan");
+        a.registrarNuevoGerente(gerente1);
         
         
     }

@@ -26,12 +26,7 @@ public class ArchivoGerente {
     public ArchivoGerente() {
         
     }
-    
-   
 
-   
- 
-    
     public void registrarNuevoGerente(Gerente gerenteNuevo){
         
    
@@ -40,7 +35,7 @@ public class ArchivoGerente {
             FileOutputStream fos = new FileOutputStream(listaGerentes,true);
             PrintStream ps= new PrintStream(fos);
             
-            if(!buscaGerentes(gerenteNuevo.getCorreo()))
+            if(!buscaGerentes(gerenteNuevo.getCorreo(),gerenteNuevo.getContrasenia()))
                  ps.println("\n"+gerenteNuevo.getNombre()+";"+gerenteNuevo.getApellidos()+";"+gerenteNuevo.getCorreo()+";"+gerenteNuevo.getTelefono()+";"+gerenteNuevo.getContrasenia());
             else 
                 System.out.println("El correo ya está asociado a un gerente");
@@ -74,7 +69,7 @@ public class ArchivoGerente {
     return entradaArchivo;
 
     }//fin BufferedReader
-    public boolean buscaGerentes(String correoGerenteNuevo) {
+    public boolean buscaGerentes(String correoGerenteNuevo, String contrasenaGerenteNuevo) {
         boolean encontrado= false;
    
         try {
@@ -110,7 +105,7 @@ public class ArchivoGerente {
                     
                   
                     }//while(st.hasMoreTokens())
-                      if(correoGerenteNuevo.equalsIgnoreCase(correo))
+                      if(correoGerenteNuevo.equalsIgnoreCase(correo) && contrasenaGerenteNuevo.equals(contrasenia))
                          encontrado= true;
                      else
                          registroActual=br.readLine();
@@ -129,9 +124,9 @@ public class ArchivoGerente {
     
     public boolean gerenteLogin(String correoGerenteNuevo, String contrasenaGerenteNuevo) {
         boolean encontrado= false;
-   
+        BufferedReader br=getBufferedReader();
         try {
-            BufferedReader br=getBufferedReader();
+            
             String registroActual =br.readLine();
             
             while(registroActual!=null && encontrado==false){
